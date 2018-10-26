@@ -7,7 +7,6 @@ module.exports = server => {
     server.use('/api', protectedApi)
 
     protectedApi.use(auth)
-
     //Areas protegidas e que necessitam de Verificação
     const BillingCycle = require('../api/billingCycle/billingCycleServices')
     BillingCycle.register(protectedApi, '/billingCycles')
@@ -15,7 +14,7 @@ module.exports = server => {
     const openApi = express.Router()
     server.use('/oapi',openApi)
 
-    //Ares Livres
+    //Ares Livres sem Verificação
     const AuthService = require('../api/user/authService')
     openApi.post('/login',AuthService.login)
     openApi.post('/signup',AuthService.signup)

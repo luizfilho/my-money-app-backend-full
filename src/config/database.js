@@ -3,7 +3,13 @@ mongoose.Promise = global.Promise
 
 const url = process.env.MONGOLAB_URI ? process.env.MONGOLAB_URI : 'mongodb://localhost/mymoney'
 
-module.exports = mongoose.connect(url, { useNewUrlParser: true })
+module.exports = mongoose.connect(url, {
+    auth: {
+        user: MONGO_DB_USER,
+        password: MONGO_DB_PASSWORD
+    },
+    useNewUrlParser: true
+})
 
 mongoose.Error.messages.general.required = "O atributo '{PATH}' é obrigátorio!"
 mongoose.Error.messages.Number.min =
